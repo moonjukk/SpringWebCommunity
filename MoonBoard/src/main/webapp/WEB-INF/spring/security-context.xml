@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+		<!-- <bean id="customAccessDenied" class="com.moonboard.security.CustomAccessDeniedHandler"></bean> -->
+		<!-- <bean id="customLoginSuccess" class="com.moonboard.security.CustomLoginSuccessHandler"></bean> -->
+		<!-- <bean id="customPasswordEncoder" class="com.moonboard.security.CustomNoOpPasswordEncoder"></bean> -->
+		<!-- <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+		<bean id="customUserDetailsService" class="org.zerock.security.CustomUserDetailsService"></bean> -->
+		<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+		<bean id="customLoginSuccess" class="com.moonboard.security.CustomLoginSuccessHandler"></bean>
+		<bean id="customAccessDenied" class="com.moonboard.security.CustomAccessDeniedHandler"></bean>
+	
+		
+		 <security:http>
+		 	<!-- <security:form-login />
+		 	<security:intercept-url pattern="/sample/all" access="permitAll"/>
+			<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+			<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/> -->
+			
+			
+			<!-- 커스텀 로그인 페이지 -->
+			<security:form-login login-page="/member/customLogin" />
+			
+			<!-- access거부되었을 경우 경로  -->
+			<security:access-denied-handler ref="customAccessDenied" />
+				
+			<!-- 인증성공 뒤 어느 페이지를 열지 선택해줬었음  -->
+			<security:form-login login-page="/member/customLogin" authentication-success-handler-ref="customLoginSuccess" />
+			
+			<!-- 로그아웃 경로 -->
+			<security:logout logout-url="/member/customLogout" invalidate-session="true" />
+			
+			<!-- 자동로그인 시 7일간 유지 -->
+			<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+			
+			<!-- <security:logout logout-url="/member/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/> -->
+			
+			
+		 </security:http>
+		
+		
+		<!-- id/pw가 일치하는지 인증하는 부분-->		
+		<security:authentication-manager>
+			<security:authentication-provider>
+			<!-- 1) 처음에는 provider를 커스텀하지 않음 
+			<security:authentication-provider user-service-ref="customUserDetailsService">-->
+				
+				<!-- 2) JDBC사용하기, 암호화를 사용하지 않고, 쿼리를 내부에 적는방식으로-->
+				<!-- <security:jdbc-user-service data-source-ref="dataSource"/>  -->
+				<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select userid, pw as userpw, enabled from moon_user where userid = ?"
+																		authorities-by-username-query="select userid, userauth as auth from moon_auth where userid = ?"/>
+				<!-- <security:password-encoder ref="customPasswordEncoder"/> -->
+				<security:password-encoder ref="bcryptPasswordEncoder"/>
+				 
+			</security:authentication-provider>
+		</security:authentication-manager>
+	
+</beans>
+

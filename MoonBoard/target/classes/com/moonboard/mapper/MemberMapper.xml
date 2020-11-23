@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.moonboard.mapper.MemberMapper">
+  
+  <select id="idCheck" resultType="int">
+  	select count(*) from moon_user where userid=#{userid}
+  </select>
+  
+  <insert id="userRegister">
+  	insert into moon_user(userid, pw, nickname, username)
+  	values(#{userid},#{pw},#{username},#{username})
+  </insert>
+  
+  <insert id="authRegister">
+  	insert into moon_auth(userid, userauth)
+  	values(#{userid},'ROLE_USER')
+  </insert>
+  
+  <select id="findNickname" resultType="String">
+  	select nickname from moon_user where userid=#{userid}
+  </select>
+  
+  <select id="beforeCheck_findBoardNoByManager" resultType="int">
+  	select count(*)
+  	from moon_board_manager 
+  	where manager_userid=#{manager_userid}
+  </select>
+  
+  <select id="findBoardNoByManager" resultType="int">
+  	select no 
+  	from moon_board_manager 
+  	where manager_userid=#{manager_userid}
+  </select>
+  
+  <select id="findManagerId" resultType="String">
+  	select manager_userid from moon_board_manager where no=#{no}
+  </select>
+  
+  </mapper>
+  

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.moonboard.mapper.BoardMapper">
+  
+  <select id="read" resultType="com.moonboard.domain.BoardVO">
+	select * from moon_board where no = #{no}  
+  </select>
+  
+  <select id="readCategory" resultType="com.moonboard.domain.Board_categoryVO">
+	select *
+	from moon_board_category
+	where pno = #{no} 
+	order by pcno asc, depth asc
+  </select>
+  <select id="readCategoryWithoutNotice" resultType="com.moonboard.domain.Board_categoryVO">
+	select *
+	from moon_board_category
+	where pno = #{no} and pcno != #{noticeNo}
+	order by pcno asc, depth asc
+  </select>
+  
+  <select id="getCategoryName" resultType="String">
+	select category_name
+	from moon_board_category
+	where cno = #{cno} 
+  </select>
+  
+  <insert id="write">
+  	<selectKey keyProperty="pno" order="BEFORE" resultType="int">
+		select seq_moon_board_page.nextval from dual
+	</selectKey>
+	insert into moon_board_page(pno, bno, cno, writer_userid, title, content)
+	values(#{pno}, #{bno}, #{cno}, #{writer_userid}, #{title}, #{content})
+  </insert>
+  
+  <insert id="imageInsert">
+  	insert into moon_image(gno, uuid, uploadpath, filename)
+  	values(#{gno},#{uuid},#{uploadpath},#{filename})
+  </insert>
+  
+  <select id="getPagenum" resultType="int">
+	select pno
+	from moon_board_page
+	where bno = #{bno} and writer_userid = #{writer_userid} and title = #{title} and content = #{content} 
+  </select>
+  
+  <select id="readPage" resultType="com.moonboard.domain.Board_pageVO">
+	select *
+	from moon_board_page
+	where pno = #{pno}
+  </select>
+  
+  <select id="getListWithPaging" resultType="com.moonboard.domain.Board_simple_pageVO">
+  		<![CDATA[
+			select X.*
+			from (
+			    select rownum as rnum, A.*
+			    from (
+			    	select a.pno, a.bno, b.nickname as writer_userid, a.write_date, a.heart, a.title, a.content, a.cno
+					from moon_board_page a, moon_user b
+					where a.cno = #{cno} and a.writer_userid = b.userid 
+					order by pno desc) A
+			    where rownum <= (#{pageNum}*7)) X
+			where X.rnum >= (#{pageNum}-1)*#{amount}+1  		
+  		]]>
+  </select>
+  
+  <select id="getTotalCount" resultType="int">
+		select count(*)
+		from moon_board_page
+		where cno = #{cno}
+  </select>
+  
+  <insert id="registeReply">
+  		<selectKey keyProperty="rno" order="BEFORE" resultType="int">
+			select seq_moon_board_reply.nextval from dual
+		</selectKey>
+		insert into moon_board_reply(pno, rno, reply_userid, reply_comment, reply_parentno)
+		values(#{pno}, #{rno}, #{reply_userid}, #{reply_comment}, #{rno})
+  </insert>
+  
+  
+  <select id="getReplyList" resultType="com.moonboard.domain.Board_replyVO">
+  		select A.pno, A.rno, A.reply_userid, B.nickname, A.reply_comment, A.reply_date, A.reply_parentno, A.depth
+		from 
+		    (
+		        select * 
+		        from moon_board_reply
+		        where pno = #{pno}
+		        order by reply_parentno asc, depth asc, reply_date asc
+		    )A, 
+		    (
+		        select userid, nickname
+		        from moon_user
+		    )B
+		where A.reply_userid = B.userid
+  </select>
+  
+  <insert id="registeReply_rereply">
+  		<selectKey keyProperty="rno" order="BEFORE" resultType="int">
+			select seq_moon_board_reply.nextval from dual
+		</selectKey>
+		insert into moon_board_reply(pno, rno, reply_userid, reply_comment, reply_parentno, depth)
+		values(#{pno}, #{rno}, #{reply_userid}, #{reply_comment}, #{reply_parentno}, #{depth})
+  </insert>
+  
+  <select id="checkManager" resultType="int">
+		select count(*)
+		from moon_board_manager
+		where manager_userid = #{manager_userid}
+  </select>
+  
+  <insert id="makeBoard">
+  		<selectKey keyProperty="no" order="BEFORE" resultType="int">
+			select seq_moon_board.nextval from dual
+		</selectKey>
+		insert into moon_board(no, title, subtitle)
+		values(#{no}, #{title}, #{subtitle})
+  </insert>
+  
+  <select id="getBoardNo" resultType="int">
+		select no
+		from moon_board
+		where title = #{title}
+  </select>
+  
+  <insert id="setManager">
+		insert into moon_board_manager(no, manager_userid)
+		values(#{no}, #{manager_userid})
+  </insert>
+  
+  <insert id="makeMotherCategory">
+  		<selectKey keyProperty="cno" order="BEFORE" resultType="int">
+			select seq_moon_board_category.nextval from dual
+		</selectKey>
+		insert into moon_board_category(pno, cno, category_name, depth, pcno) 
+		values(#{pno}, #{cno}, #{category_name}, #{depth}, #{cno})
+  </insert>
+  
+  <insert id="makeSonCategory">
+  		<selectKey keyProperty="cno" order="BEFORE" resultType="int">
+			select seq_moon_board_category.nextval from dual
+		</selectKey>
+		insert into moon_board_category(pno, cno, category_name, depth, pcno) 
+		values(#{pno}, #{cno}, #{category_name}, #{depth}, #{pcno})
+  </insert>
+  
+  <select id="getParentCategoryCNO" resultType="int">
+		select cno
+		from moon_board_category
+		where pno=#{pno} and category_name=#{category_name}
+  </select>
+  
+  <select id="getTopBoard" resultType="com.moonboard.domain.BoardVO">
+  	<![CDATA[
+	select c.*, d.*
+	from(
+	    select rownum, b.title, b.subtitle, a.*
+	    from
+	        (select bno as no, count(*) as total_page from moon_board_page group by bno order by total_page desc)A, 
+	        (select * from moon_board)B
+	    where A.no = B.no and rownum<=3
+	)c
+	Left join(
+	    select * 
+	    from moon_board_image
+	)d
+	on c.no = d.bno and type=1
+	]]>
+  </select>
+  
+  <select id="getBoardManagerID" resultType="String">
+		select manager_userid
+		from moon_board_manager
+		where no = #{no}
+  </select>
+  
+  <!-- /board/page에서 게시글 이미지 불러오기 -->
+  <select id="findPageImg" resultType="com.moonboard.domain.ImageVO">
+	    select * from moon_image where gno=#{pno} and thumbnail=0
+  </select>
+  
+  	<update id="changeTitle">
+		update moon_board 
+		set title=#{title} 
+		where no=#{no}
+	</update>
+	
+	<update id="changeSubTitle">
+		update moon_board 
+		set subtitle=#{subtitle} 
+		where no=#{no}
+	</update>
+	
+	<delete id="removeBanner">
+		delete moon_board_image where bno=#{bno} and type=#{type} 
+	</delete>
+	
+	<insert id="insertBanner">
+	  	<selectKey keyProperty="ino" order="BEFORE" resultType="int">
+			select seq_moon_board_image.nextval from dual
+		</selectKey>
+		insert into moon_board_image(ino, uploadpath, filename, uuid, bno, type)
+		values(#{ino}, #{uploadpath}, #{filename}, #{uuid}, #{bno}, #{type})
+	</insert>
+	
+  <select id="readMainBanner" resultType="com.moonboard.domain.ImageVO">
+		select *
+		from moon_board_image
+		where bno=#{no} and type=1
+  </select>
+  <select id="readTopBanner" resultType="com.moonboard.domain.ImageVO">
+		select *
+		from moon_board_image
+		where bno=#{no} and type=2
+  </select>
+	
+	
+	<select id="getSearchBoard" resultType="com.moonboard.domain.BoardVO">
+		<![CDATA[
+	    select *
+		from moon_board
+		where title like '%'||#{title}||'%' and rownum<=7
+		order by title
+		]]>
+  	</select>
+  	
+  	<select id="findNoticeNo" resultType="int">
+		select cno
+		from moon_board_category
+		where category_name='필독공지' and pno=#{no} and depth=2
+  	</select>
+  	<select id="findNoticePcno" resultType="int">
+		select cno
+		from moon_board_category
+		where category_name='공지사항' and pno=#{no} and depth=1
+  	</select>
+  
+	<select id="findNoticeInHome" resultType="com.moonboard.domain.Board_simple_pageVO">
+		<![CDATA[
+	    select *
+		from    (select * 
+		        from moon_board_page
+		        where cno=#{noticeNo} and rownum<=10
+		        order by write_date desc)A,
+		        (select userid, nickname 
+		        from moon_user)B
+		where A.writer_userid = B.userid
+		]]>
+  	</select>
+  	
+	<select id="findNoticeInList" resultType="com.moonboard.domain.Board_simple_pageVO">
+		<![CDATA[
+	    select *
+		from    (select * 
+		        from moon_board_page
+		        where cno=#{noticeNo} and rownum<=2
+		        order by write_date desc)A,
+		        (select userid, nickname 
+		        from moon_user)B
+		where A.writer_userid = B.userid
+		]]>
+  	</select>
+  
+  	<select id="getRecentBoard" resultType="com.moonboard.domain.BoardVO">
+	  	<![CDATA[
+			select A.*, B.uploadpath, B.uuid, B.filename
+			from (select A.no, B.title, B.subtitle, max(write_date)
+			        from (select B.bno as no, A.reply_userid as id, reply_date as write_date
+			                from(select * from moon_board_reply where reply_userid=#{name} order by reply_date desc)A,
+			                    (select * from moon_board_page)B
+			                where A.pno = B.pno
+			                union
+			                select bno as no, writer_userid as id, write_date 
+			                from moon_board_page
+			                where writer_userid=#{name} 
+			                order by write_date desc
+			            )A,
+			            (select * from moon_board)B
+			        where A.no = B.no
+			        group by A.no, B.title, B.subtitle
+			        order by max(write_date) desc)A,
+			        (select * from moon_board_image)B
+			where A.no = B.bno and rownum<=4
+		]]>
+	</select>
+  
+  	<delete id="deleteReply">
+		delete moon_board_reply where rno=#{rno} or reply_parentno=#{rno}
+	</delete>
+	
+  	<delete id="delMotherCategory">
+		delete moon_board_category where pcno=#{cno}
+	</delete>
+  	
+  	<delete id="delSonCategory">
+		delete moon_board_category where cno=#{cno}
+	</delete>
+  </mapper>
+  

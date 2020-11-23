@@ -1,0 +1,123 @@
+moon_board
+게시판 각각의 정보
+create table moon_board(
+    no number PRIMARY KEY,
+    title varchar2(40) not null,
+    subtitle varchar2(60),
+    color number default '1'
+);
+create sequence seq_moon_board;
+
+INSERT into moon_board(no, title, subtitle) values(
+    seq_moon_board.nextval, '코딩테스트', '코딩테스트 페이지'
+);
+
+
+
+
+
+moon_board_manager
+게시판관리자 
+create table moon_board_manager(
+    no number PRIMARY KEY,
+    manager_userid varchar2(80) not null
+);
+create sequence seq_moon_board_manager;
+
+
+
+moon_board_category
+pno 부모게시판번호 / cno 카테고리번호 / pcno 부모카테고리번호
+create table moon_board_category(
+    pno number not null,
+    cno number PRIMARY KEY,
+    category_name varchar2(80) not null,
+    depth number default 1,
+    pcno number
+);
+create sequence seq_moon_board_category;
+
+
+
+moon_board_page
+게시물 / pno(페이지번호) / bno(게시판번호=cno카테고리번호)
+create table moon_board_page(
+    pno number primary key,
+    bno number not null,
+    title varchar2(40) not null,
+    content varchar2(1000) not null,
+    writer_userid varchar2(80) not null,
+    write_date  timestamp DEFAULT sysdate NOT NULL,
+    heart number default 0
+);
+create sequence seq_moon_board_page;
+
+
+
+
+moon_board_reply
+pno 게시글번호
+rno 댓글에 부여될 고유번호 (대댓글 후순위)
+reply_userid
+reply_comment
+reply_date
+reply_parentno(대댓글 후순위)
+depth(대댓글 후순위)
+create table moon_board_reply(
+    pno number not null,
+    rno number not null,
+    reply_userid varchar2(80) not null,
+    reply_comment varchar2(800) not null,
+    reply_date timestamp DEFAULT sysdate NOT NULL,
+    reply_parentno number,
+    depth number default 1
+);
+create sequence seq_moon_board_reply;
+
+
+
+
+moon_user
+회원정보
+userid(PK)
+pw
+nickname
+username
+enabled '1'
+create table moon_user(
+    userid varchar2(80) primary key,
+	pw varchar2(100) NOT NULL,
+    nickname varchar2(20) NOT NULL,
+	username varchar2(20) NOT NULL,
+    -- 기본값 1이아니면 로그인이 불가능 - 스프링시큐리티
+	enabled char(1) DEFAULT '1' NOT NULL
+);
+
+
+
+moon_auth
+userid
+userauth
+CREATE TABLE moon_auth
+(
+	userid varchar2(20) NOT NULL,
+	userAuth varchar2(20)
+);
+
+
+
+moon_user_img(예정사항 후순위)
+회원의 프로필
+userid(PK)
+uploadpath
+filename
+uuid
+thumbnail?
+
+
+
+
+
+moon_board_image  // 게시판의 배너이미지
+create sequence seq_moon_board_image;
+
