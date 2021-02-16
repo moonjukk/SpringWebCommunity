@@ -48,7 +48,8 @@ create table moon_board_page(
     content varchar2(1000) not null,
     writer_userid varchar2(80) not null,
     write_date  timestamp DEFAULT sysdate NOT NULL,
-    heart number default 0
+    heart number default 0,
+    cno number
 );
 create sequence seq_moon_board_page;
 
@@ -119,5 +120,15 @@ thumbnail?
 
 
 moon_board_image  // 게시판의 배너이미지
+CREATE TABLE moon_board_image
+(
+	ino number not null,
+	uploadpath varchar2(50) not null,
+	filename varchar2(200) not null,
+	uuid varchar2(100) not null,
+	bno number not null,
+	type number not null default 1
+);
+
 create sequence seq_moon_board_image;
 
