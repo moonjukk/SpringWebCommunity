@@ -132,3 +132,14 @@ CREATE TABLE moon_board_image
 
 create sequence seq_moon_board_image;
 
+
+
+
+moon_img
+CREATE TABLE moon_img
+(
+	gno number not null,
+	uuid varchar2(100) not null,
+	uploadpath varchar2(50) not null,
+	filename varchar2(200) not null
+);
