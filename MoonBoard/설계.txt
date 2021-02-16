@@ -141,5 +141,6 @@ CREATE TABLE moon_img
 	gno number not null,
 	uuid varchar2(100) not null,
 	uploadpath varchar2(50) not null,
-	filename varchar2(200) not null
+	filename varchar2(200) not null,
+    thumbnail char(1) default '0'
 );
