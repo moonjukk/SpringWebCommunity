@@ -29,128 +29,157 @@
 <%@ include file="../includes/board_main_top.jsp" %>
 
 <style>
-#searcher input[type="text"]{
-        width: 80%;
-        height: 40px;
-        margin-top: 10px;
-        border: 1px solid rgb(206, 206, 206);
-        border-radius: 8px;
-        padding-left: 20px;
-    }
-    #searcher input[type="button"]{
-        width: 10%;
-        height: 43px;
-        background-color: rgb(235, 235, 235);
-        margin-top: 10px;
-        border: 1px solid rgb(206, 206, 206);
-        border-radius: 8px;
-        cursor: pointer;
-    }
-    #searcher input[type="button"]:hover{
-        border: 1px solid black;
-    }
+#searcher input[type="text"] {
+	width: 80%;
+	height: 40px;
+	margin-top: 10px;
+	border: 1px solid rgb(206, 206, 206);
+	border-radius: 8px;
+	padding-left: 20px;
+}
 
+#searcher input[type="button"] {
+	width: 10%;
+	height: 43px;
+	background-color: rgb(235, 235, 235);
+	margin-top: 10px;
+	border: 1px solid rgb(206, 206, 206);
+	border-radius: 8px;
+	cursor: pointer;
+}
 
-    #board{
-        margin-top: 30px;
-        width: 100%;
-    }
-    #boardTitle{
-        font-size: 34px;
-        font-weight: 700;
-        margin-bottom: 5px;
-    }
-    #boardBoarder{
-        width: 105%;
-        height: 3px;
-    }
-    .boardList{
-        width: 100%;
-        height: 26px;
-        padding: 10px 25px;
-        border-bottom: 1px solid rgb(201, 201, 201);
-    }
-    .boardList div{
-        float: left;
-    }
-    .boardBox{
-        width: 56px;
-        background-color: rgb(56, 56, 56);
-        color: white;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 5px 0px;
-        text-align: center;
-        margin-right: 30px;
-    }
-    .boardListTitle{
-        width: 45%;
-        margin-top: 4px;
-        font-size: 15px;
-    }
-    .boardListTitle a{
-    	text-decoration: none;
-    	color: black;
-    }
-    .boardListTitle a:hover{
-        color: rgb(121, 121, 121);
-    }
-    .boardListTitle:hover{
-        color: rgb(121, 121, 121);
-        cursor: pointer;
-    }
-    .boardWriter{
-        width: 113px;
-        margin-top: 4px;
-        font-size: 15px;
-        color: rgb(71, 71, 71);
-    }
-    .boardWriter i{
-        margin-left: 2px;
-        margin-right: 2px;
-    }
-    .boardWriter i img{
-    }
-    .boardInfo{
-        margin-top: 4px;
-        font-size: 15px;
-        margin-left: 40px;
-        color: rgb(71, 71, 71);
-    }
-    .boardTime{
-        width: 77px;
-    }
-    .boardView{
-        width: 82px;
-    }
-    .boardLike{
-        width: 55px;
-    }
-    #pagingZone{
-        width: 106%;
-        text-align: center;
-        padding-top: 30px;
-    }
-    #pagingZone a{
-        text-decoration: none;
-        font-size: 20px;
-        color: rgb(158, 158, 158);
-    }
-    #pagingZone a:hover{
-        color: rgb(46, 46, 46);
-    }
-    .pagingMargin{
-        padding: 0px 13px;
-    }
-    .pagingBtn{
-        border: 1px solid rgb(190, 190, 190);
-        padding: 0px 8px;
-        padding-bottom: 6px;
-        border-radius: 9px;
-    }
-    .pagingBtn:hover{
-        background-color: rgb(241, 241, 241);
-    }
+#searcher input[type="button"]:hover {
+	border: 1px solid black;
+}
+
+#board {
+	margin-top: 30px;
+	width: 100%;
+}
+
+#boardTitle {
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+#boardBoarder {
+	width: 105%;
+	height: 3px;
+}
+
+.boardList {
+	width: 100%;
+	height: 26px;
+	padding: 10px 25px;
+	border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.boardList div {
+	float: left;
+}
+
+.boardBox {
+	width: 56px;
+	background-color: rgb(56, 56, 56);
+	color: white;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 5px 0px;
+	text-align: center;
+	margin-right: 30px;
+}
+
+.boardListTitle {
+	width: 45%;
+	margin-top: 4px;
+	font-size: 15px;
+}
+
+.boardListTitle a {
+	text-decoration: none;
+	color: black;
+}
+
+.boardListTitle a:hover {
+	color: rgb(121, 121, 121);
+}
+
+.boardListTitle:hover {
+	color: rgb(121, 121, 121);
+	cursor: pointer;
+}
+
+.boardWriter {
+	width: 113px;
+	margin-top: 4px;
+	font-size: 15px;
+	color: rgb(71, 71, 71);
+}
+
+.boardWriter i {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.boardWriter i img {
+	
+}
+
+.boardInfo {
+	margin-top: 4px;
+	font-size: 15px;
+	margin-left: 40px;
+	color: rgb(71, 71, 71);
+}
+
+.boardTime {
+	width: 77px;
+}
+
+.boardView {
+	width: 82px;
+}
+
+.boardLike {
+	width: 55px;
+}
+
+#pagingZone {
+	width: 106%;
+	text-align: center;
+	padding-top: 30px;
+}
+
+#pagingZone a {
+	text-decoration: none;
+	font-size: 20px;
+	color: rgb(158, 158, 158);
+}
+
+#pagingZone a:hover {
+	color: rgb(46, 46, 46);
+}
+
+.pagingMargin {
+	padding: 0px 13px;
+}
+
+.pagingBtn {
+	border: 1px solid rgb(190, 190, 190);
+	padding: 0px 8px;
+	padding-bottom: 6px;
+	border-radius: 9px;
+}
+
+.pg_selected {
+	padding: 0px 8px;
+	padding-bottom: 5px;
+	border-radius: 9px;
+	color: white !important;
+	background-color: rgb(209, 209, 209);
+}
+
 </style>
 
 <main>
@@ -220,11 +249,12 @@
                     
                     <!-- 페이징버튼 ------------------------------->
                     <div id="pagingZone">
+                    	<input type="hidden" id="getPageNum" value="${pageMaker.cri.pageNum}">
                     	<c:if test="${pageMaker.prev}">
                         	<a href="#" class="pagingBtn"><</a>
                     	</c:if>
                     	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	                        <a href="#" class="pagingMargin">${num}</a>             				        
+	                        <a href="#" class="pagingMargin">${num}</a>           				        
 	                    </c:forEach>
 	                    <!-- 
 	                    <a href="#" class="pagingMargin">1</a>

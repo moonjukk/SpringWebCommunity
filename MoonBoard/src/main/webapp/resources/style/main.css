@@ -1,0 +1,485 @@
+	body{
+        margin: 0;
+        height: 1400px;
+    }
+    #nav{
+        width: 100%;
+        height: 55px;
+        background: linear-gradient(45deg, #b062f8, #c8e2ff) !important;
+    }
+    #nav_content{
+        width: 1000px;
+        margin: auto;
+    }
+    #nav_logo{
+        float: left;
+        font-size: 36px;
+        font-weight: 800;
+        color: white;
+    }
+    #nav_search{
+        float: left;
+        margin-left: 25px;
+    }
+    
+    #nav_searcher{
+        width: 254px;
+        border-left: 1px solid rgb(139, 139, 139);
+        border-right: 1px solid rgb(139, 139, 139);
+        border-bottom: 1px solid rgb(139, 139, 139);
+        border-bottom-left-radius: 9px;
+        border-bottom-right-radius:9px;
+        background-color: white;
+        position:absolute
+    }
+    #searcher_top{
+        padding: 6px 7px;
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        background-color:rgb(165, 165, 165)
+    }
+    .searcher_list{
+        padding: 4px 7px;
+        font-size: 14px;
+        cursor: pointer;
+        color: rgb(105, 105, 105);
+    }
+    .searcher_list:hover{
+        color: rgb(0, 0, 0);
+    }
+    
+    
+    #nav_search input[type='text']{
+        height: 33px;
+        width: 250px;
+        margin-top: 8px;
+        border: 1px solid rgb(204, 204, 204);
+    }
+    #nav_search input[type='button']{
+        height: 36px;
+        padding-top: 2px;
+        padding-bottom: 4px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: 0px !important;
+        border: 1px solid rgb(231, 231, 231);
+        background-color: #a64cfa;
+        color: rgb(231, 231, 231);
+        font-weight: 600;
+    }
+    #nav_login{
+        float: right;
+        font-size: 19px;
+        margin-top: 12px;
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+    }
+    #nav_login i{
+        margin-right: 5px;
+    }
+
+
+    #main{
+        width: 1000px;
+        margin: auto;
+    }
+    #main_left{
+        width: 70%;
+        float: left;
+    }
+    #main_left_content{
+        margin: auto;
+    }
+    #main_right{
+        width: 30%;
+        float: left;
+    }
+    #main_picker_title{
+        width: 100%;
+        float: left;
+    }
+    #main_picker_title p{
+        margin-top: 30px;
+        margin-left: 10px;
+        font-size: 22px;
+        font-weight: 600;
+        float: left;
+    }
+    #main_picker_title input{
+        margin-top: 30px;
+        float: right;
+        margin-right: 30px;
+        margin-top: 35px;
+        padding: 3px 15px;
+        border: 1px solid rgb(215, 173, 255);
+        background-color: white;
+        color: rgb(150, 38, 255);
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+
+    #main_picker_box{
+        width: 100%;
+        float: left;
+    }
+    #picker_margin{
+        height: 1px;
+        float: left;
+        width: 10px;
+    }
+    .picker_box{
+        width: 210px;
+        height: 210px;
+        float: left;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    .picker_box_img img{
+        width: 210px;
+        height: 210px;
+        background: linear-gradient(45deg, #b062f8, #c8e2ff);
+    }
+    .picker_nav{
+        width: 90%;
+        height: 24%;
+        position: relative;
+        top: -62px;
+        left: 10px;
+        background-color: rgb(112, 112, 112);
+        opacity: 0.6;
+    }
+    .picker_box_title{
+        width: 90%;
+        position: relative;
+        top: -110px;
+        left: 13px;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+    .picker_box_subtitle{
+        width: 90%;
+        position: relative;
+        top: -110px;
+        left: 14px;
+        color: white;
+        font-size: 14px;
+    }
+
+    #recent_board_title{
+        width: 100%;
+        float: left;
+    }
+    #recent_board_title p{
+        margin-top: 30px;
+        margin-left: 10px;
+        font-size: 22px;
+        font-weight: 600;
+        float: left;
+    }
+    #recent_board_title input{
+        margin-top: 30px;
+        float: right;
+        margin-right: 30px;
+        margin-top: 35px;
+        padding: 3px 15px;
+        border: 1px solid rgb(215, 173, 255);
+        background-color: white;
+        color: rgb(150, 38, 255);
+        font-weight: 600;
+        border-radius: 5px;
+        
+    }
+    
+    #recent_board_box_zone{
+        width: 100%;
+        float: left;
+        padding: 15px;
+    }
+    .recent_board_box{
+        width: 93%;
+        background-color: white;
+        height: 55px;
+        padding-top: 10px;
+        border-bottom: 1px solid rgb(204, 204, 204);
+    }
+    .recent_board_box i{
+        font-size: 32px;
+        border: 1px solid rgb(185, 185, 185);
+        padding: 5px 10px;
+        border-radius: 8px;
+        float: left;
+        margin-right: 10px;
+        margin-top: 2px;
+    }
+
+
+    .recent_board_box_comment{
+
+    }
+
+    .recent_board_box_comment1{
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .recent_board_box_comment1:hover{
+        color: rgb(225, 117, 247);
+    }
+    .recent_board_box_comment2{
+        margin-left: 10px;
+    }
+    #main_right_content{
+        margin: auto;
+    }
+    #login_zone{
+        width: 100%;
+        height: 150px;
+        margin-top: 35px;
+        border: 1px solid rgb(215, 147, 255);
+        background-color: #fcfcfc;
+    }
+    #loginBtn{
+        width: 80%;
+        height: 55px;
+        margin: auto;
+        margin-top: 22px;
+        margin-bottom: 20px;
+        border: none;
+        background: linear-gradient(45deg, #c389f8, #c8e2ff);
+        text-align: center;
+        font-weight: 600;
+        font-size: 26px;
+        padding-top: 18px;
+        color: white;
+        cursor: pointer;
+    }
+    #login_zone a{
+        text-decoration: none;
+        color: rgb(133, 133, 133);
+        font-size: 14px;
+        font-weight: 600;
+    }
+    #login_zone a:hover{
+        color: rgb(34, 34, 34);
+    }
+    #go_join{
+        margin-left: 30px;
+    }
+    #go_findId{
+        margin-left: 10px;
+    }
+    #go_findPw{
+        margin-left: 10px;
+    }
+
+    #login_info_zone{
+        width: 100%;
+        height: 150px;
+        margin-top: 35px;
+        border: 1px solid rgb(215, 147, 255);
+        background-color: #fcfcfc;
+    }
+
+    #makeBoardBtn{
+        width: 100%;
+        height: 41px;
+        background: linear-gradient(45deg, #c389f8, #c8e2ff);
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        padding-top: 12px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+    #moveBoardBtn{
+        width: 100%;
+        height: 41px;
+        background: linear-gradient(45deg, #c389f8, #c8e2ff);
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        margin-top: 30px;
+        cursor: pointer;
+        
+        text-decoration: none;
+		border: none;
+		padding: 12px 76px;
+    }
+
+    #loginfo_top{
+        width: 100%;
+        height: 70%;
+
+    }
+    #loginfo_top_left{
+        width: 35%;
+        height: 100%;
+        float: left;
+    }
+    #profileImg{
+        width: 70px;
+        height: 70px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+        padding-left: 22px;
+        padding-right: 9px;
+    }
+    #loginfo_top_right{
+        width: 65%;
+        float: left;
+        padding-top: 30px;
+        font-size: 18px;
+    }
+    #loginfo_top_right span{
+
+    }
+
+
+    #loginfo_bottom{
+        width: 100%;
+        height: 30%;
+        border-top: 1px solid rgb(215, 147, 255);
+    }
+    #loginfo_bottom div{
+        float: left;
+        width: 24.7%;
+        height: 74%;
+        text-align: center;
+        font-size: 14px;
+        padding-top: 12px;
+        cursor: pointer;
+        color: rgb(92, 92, 92);
+        font-weight: 600;
+    }
+    #goEditProfile{
+        font-size: 14px;
+        margin-left: 7px;
+        color: rgb(124, 124, 124);
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .border_right{
+        border-right: 1px solid rgb(215, 147, 255);
+    }
+    .myFont1{
+        font-size: 15px;
+        color: rgb(92, 92, 92);
+    } 
+    #notice_zone h4{
+        color: rgb(92, 92, 92);
+        margin-bottom: 10px;
+    }
+    #notice_box{
+        width: 100%;
+        border-top: 1px solid rgb(191, 80, 255);
+        border-bottom: 1px solid rgb(191, 80, 255);
+        padding: 10px 0px;
+    }
+    .notice_boxies{
+        overflow: hidden;
+        height: 20px;
+        font-size: 14px;
+        margin-bottom: 3px;
+        cursor: pointer;
+    }
+    .notice_boxies:hover{
+        color: rgb(214, 81, 255);
+    }
+
+    #btn_recentBoard{
+        cursor: pointer;
+    }
+
+    .line{
+        float: left;
+        width: 95%;
+        height: 1px;
+        background-color: rgb(215, 147, 255);
+        margin-left: 10px;
+        margin-top: 40px;
+    }
+    .hidden{
+        display: none;
+    }
+    
+    #go_logout{
+    	background-color: #fcfcfc;
+    	border: none;
+    	text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        color: rgb(92, 92, 92);
+        margin-top: 11px;
+        margin-left: 4px;
+        font-weight: 600;
+    }
+    #recent_board_zone{
+        float: left;
+        margin-left: 10px;
+    }
+    #recent_board_zone h4{
+        color: rgb(107, 107, 107);
+        margin-left: 30px;
+    }
+    .recent_boards{
+        float: left;
+        width: 140px;
+        height: 240px;
+        margin-left: 20px;
+        border: 1px solid rgb(230, 230, 230);
+        box-shadow: 3px 3px 5px rgb(231, 231, 231);
+        border-radius: 15px;
+    }
+    .recent_boards_top{
+        width: 100%;
+        height: 40%;
+        border-bottom: 1px solid rgb(230, 230, 230);
+        overflow: hidden;
+    }
+    .recent_boards_top img{
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+
+    
+    .recent_boards_bot{
+        width: 100%;
+        height: 60%;
+        position: relative;
+        float: left;
+        padding: 12px;
+    }
+    .recent_boards_bot_title{
+        width: 85%;
+        font-size: 16px;
+        font-weight: 800;
+        color: rgb(80, 80, 80);
+        margin-bottom: 10px;
+    }
+    .recent_boards_bot_subtitle{
+        width: 85%;
+        font-size: 12px;
+        color: rgb(134, 134, 134);
+    }
+    .recent_boards_bot_btn{
+        width: 72%;
+        position: absolute;
+        bottom: 35px;
+        border: none;
+        padding: 6px 0px;
+        border-radius: 10px;
+        color: rgb(109, 109, 109);
+        font-weight: 600;
+        cursor: pointer;
+    }

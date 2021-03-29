@@ -71,7 +71,10 @@ public class BoardController {
 		model.addAttribute("topBannerImg", boardService.readTopBanner(no));
 		
 		// 필독공지사항 최대 10개 읽어오기
-		model.addAttribute("noticeList", boardService.findNotice(no));
+		//model.addAttribute("noticeList", boardService.findNotice(no));
+		// 여기서 왜 cno관련 에러나는지?
+		
+		
 		model.addAttribute("no",no);
 		model.addAttribute("cno",boardService.findNoticeNo(no));
 		
@@ -350,7 +353,7 @@ public class BoardController {
 				 * 파일선택 or 드래그 시 서버에 업로드
 				 */
 		 		List<ImageVO> list = new ArrayList<>();
-				String uploadFolder = "C:\\upload";
+				String uploadFolder = "/Users/moon/Documents/spring/upload";
 				
 				// 폴더생성(연)
 				String uploadFolderPathYear = getFolderPrev2();
@@ -381,7 +384,8 @@ public class BoardController {
 					String uploadFileName = multipartFile.getOriginalFilename();
 					
 					//IE
-					uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+					//uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+					uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/")+1);
 
 					// attachDTO에 정보 저장
 					attachDTO.setFilename(uploadFileName);

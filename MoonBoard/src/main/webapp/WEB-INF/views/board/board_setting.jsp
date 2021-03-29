@@ -265,7 +265,6 @@
             	uuid = jobj.data("uuid");
             	uploadpath = jobj.data("uploadpath");
             	filename = jobj.data("filename");
-            	
             });
         	var category_name = $('#setting_makeMotherCategory_val').val();
 			var bno = $('#whereBoard').val();

@@ -19,7 +19,9 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 	
-	<resources mapping="/img/**" location="file:///C:/upload/" />
+	<!-- <resources mapping="/img/**" location="file:///C:/upload/" /> -->
+	<resources mapping="/img/**" location="file:///Users/moon/Documents/spring/upload/" />
+	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled">

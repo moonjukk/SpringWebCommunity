@@ -62,7 +62,7 @@
 					from moon_board_page a, moon_user b
 					where a.cno = #{cno} and a.writer_userid = b.userid 
 					order by pno desc) A
-			    where rownum <= (#{pageNum}*7)) X
+			    where rownum <= (#{pageNum}*12)) X
 			where X.rnum >= (#{pageNum}-1)*#{amount}+1  		
   		]]>
   </select>

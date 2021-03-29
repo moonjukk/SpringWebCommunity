@@ -17,13 +17,14 @@
 		
 			<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		
-	   <property name="driverClassName"
-         value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-      <property name="jdbcUrl"
-         value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
+	   <!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
+       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+       
+       
+       <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 
-		<property name="username" value="ora_user"></property>
-		<property name="password" value="hong"></property>
+		<property name="username" value="system"></property>
+        <property name="password" value="oracle"></property>
 	</bean>
 
 	<!-- HikariCP configuration -->

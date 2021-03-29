@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -17,7 +17,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
       />
       
-    <!-- Á¦ÀÌÄõ¸® cdn -->
+    <!-- ì œì´ì¿¼ë¦¬ cdn -->
     <script
     src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -25,617 +25,29 @@
     
     <script src="js/jquery.cookie.js"></script>
     
+    <!-- css/js -->
+    <link rel="stylesheet" href="/resources/style/main.css" />
+    <script src="/resources/js/main.js"></script>
+    
 </head>
-<style>
-    body{
-        margin: 0;
-        height: 1400px;
-    }
-    #nav{
-        width: 100%;
-        height: 55px;
-        background: linear-gradient(45deg, #b062f8, #c8e2ff) !important;
-    }
-    #nav_content{
-        width: 1000px;
-        margin: auto;
-    }
-    #nav_logo{
-        float: left;
-        font-size: 36px;
-        font-weight: 800;
-        color: white;
-    }
-    #nav_search{
-        float: left;
-        margin-left: 25px;
-    }
-    
-    #nav_searcher{
-        width: 254px;
-        border-left: 1px solid rgb(139, 139, 139);
-        border-right: 1px solid rgb(139, 139, 139);
-        border-bottom: 1px solid rgb(139, 139, 139);
-        border-bottom-left-radius: 9px;
-        border-bottom-right-radius:9px;
-        background-color: white;
-        position:absolute
-    }
-    #searcher_top{
-        padding: 6px 7px;
-        font-size: 14px;
-        font-weight: 600;
-        color: white;
-        background-color:rgb(165, 165, 165)
-    }
-    .searcher_list{
-        padding: 4px 7px;
-        font-size: 14px;
-        cursor: pointer;
-        color: rgb(105, 105, 105);
-    }
-    .searcher_list:hover{
-        color: rgb(0, 0, 0);
-    }
-    
-    
-    #nav_search input[type='text']{
-        height: 33px;
-        width: 250px;
-        margin-top: 8px;
-        border: 1px solid rgb(204, 204, 204);
-    }
-    #nav_search input[type='button']{
-        height: 36px;
-        padding-top: 2px;
-        padding-bottom: 4px;
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-left: 0px !important;
-        border: 1px solid rgb(231, 231, 231);
-        background-color: #a64cfa;
-        color: rgb(231, 231, 231);
-        font-weight: 600;
-    }
-    #nav_login{
-        float: right;
-        font-size: 19px;
-        margin-top: 12px;
-        color: rgb(255, 255, 255);
-        font-weight: 600;
-    }
-    #nav_login i{
-        margin-right: 5px;
-    }
-
-
-    #main{
-        width: 1000px;
-        margin: auto;
-    }
-    #main_left{
-        width: 70%;
-        float: left;
-    }
-    #main_left_content{
-        margin: auto;
-    }
-    #main_right{
-        width: 30%;
-        float: left;
-    }
-    #main_picker_title{
-        width: 100%;
-        float: left;
-    }
-    #main_picker_title p{
-        margin-top: 30px;
-        margin-left: 10px;
-        font-size: 22px;
-        font-weight: 600;
-        float: left;
-    }
-    #main_picker_title input{
-        margin-top: 30px;
-        float: right;
-        margin-right: 30px;
-        margin-top: 35px;
-        padding: 3px 15px;
-        border: 1px solid rgb(215, 173, 255);
-        background-color: white;
-        color: rgb(150, 38, 255);
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-
-    #main_picker_box{
-        width: 100%;
-        float: left;
-    }
-    #picker_margin{
-        height: 1px;
-        float: left;
-        width: 10px;
-    }
-    .picker_box{
-        width: 210px;
-        height: 210px;
-        float: left;
-        margin-right: 15px;
-        cursor: pointer;
-    }
-    .picker_box_img img{
-        width: 210px;
-        height: 210px;
-        background: linear-gradient(45deg, #b062f8, #c8e2ff);
-    }
-    .picker_nav{
-        width: 90%;
-        height: 24%;
-        position: relative;
-        top: -62px;
-        left: 10px;
-        background-color: rgb(112, 112, 112);
-        opacity: 0.6;
-    }
-    .picker_box_title{
-        width: 90%;
-        position: relative;
-        top: -110px;
-        left: 13px;
-        color: white;
-        font-weight: 600;
-        font-size: 18px;
-    }
-    .picker_box_subtitle{
-        width: 90%;
-        position: relative;
-        top: -110px;
-        left: 14px;
-        color: white;
-        font-size: 14px;
-    }
-
-    #recent_board_title{
-        width: 100%;
-        float: left;
-    }
-    #recent_board_title p{
-        margin-top: 30px;
-        margin-left: 10px;
-        font-size: 22px;
-        font-weight: 600;
-        float: left;
-    }
-    #recent_board_title input{
-        margin-top: 30px;
-        float: right;
-        margin-right: 30px;
-        margin-top: 35px;
-        padding: 3px 15px;
-        border: 1px solid rgb(215, 173, 255);
-        background-color: white;
-        color: rgb(150, 38, 255);
-        font-weight: 600;
-        border-radius: 5px;
-        
-    }
-    
-    #recent_board_box_zone{
-        width: 100%;
-        float: left;
-        padding: 15px;
-    }
-    .recent_board_box{
-        width: 93%;
-        background-color: white;
-        height: 55px;
-        padding-top: 10px;
-        border-bottom: 1px solid rgb(204, 204, 204);
-    }
-    .recent_board_box i{
-        font-size: 32px;
-        border: 1px solid rgb(185, 185, 185);
-        padding: 5px 10px;
-        border-radius: 8px;
-        float: left;
-        margin-right: 10px;
-        margin-top: 2px;
-    }
-
-
-    .recent_board_box_comment{
-
-    }
-
-    .recent_board_box_comment1{
-        font-weight: 600;
-        font-size: 18px;
-        cursor: pointer;
-    }
-    .recent_board_box_comment1:hover{
-        color: rgb(225, 117, 247);
-    }
-    .recent_board_box_comment2{
-        margin-left: 10px;
-    }
-    #main_right_content{
-        margin: auto;
-    }
-    #login_zone{
-        width: 100%;
-        height: 150px;
-        margin-top: 35px;
-        border: 1px solid rgb(215, 147, 255);
-        background-color: #fcfcfc;
-    }
-    #loginBtn{
-        width: 80%;
-        height: 55px;
-        margin: auto;
-        margin-top: 22px;
-        margin-bottom: 20px;
-        border: none;
-        background: linear-gradient(45deg, #c389f8, #c8e2ff);
-        text-align: center;
-        font-weight: 600;
-        font-size: 26px;
-        padding-top: 18px;
-        color: white;
-        cursor: pointer;
-    }
-    #login_zone a{
-        text-decoration: none;
-        color: rgb(133, 133, 133);
-        font-size: 14px;
-        font-weight: 600;
-    }
-    #login_zone a:hover{
-        color: rgb(34, 34, 34);
-    }
-    #go_join{
-        margin-left: 30px;
-    }
-    #go_findId{
-        margin-left: 10px;
-    }
-    #go_findPw{
-        margin-left: 10px;
-    }
-
-    #login_info_zone{
-        width: 100%;
-        height: 150px;
-        margin-top: 35px;
-        border: 1px solid rgb(215, 147, 255);
-        background-color: #fcfcfc;
-    }
-
-    #makeBoardBtn{
-        width: 100%;
-        height: 41px;
-        background: linear-gradient(45deg, #c389f8, #c8e2ff);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        padding-top: 12px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        cursor: pointer;
-    }
-    #moveBoardBtn{
-        width: 100%;
-        height: 41px;
-        background: linear-gradient(45deg, #c389f8, #c8e2ff);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        margin-top: 30px;
-        cursor: pointer;
-        
-        text-decoration: none;
-		border: none;
-		padding: 12px 76px;
-    }
-
-    #loginfo_top{
-        width: 100%;
-        height: 70%;
-
-    }
-    #loginfo_top_left{
-        width: 35%;
-        height: 100%;
-        float: left;
-    }
-    #profileImg{
-        width: 70px;
-        height: 70px;
-        padding-top: 17px;
-        padding-bottom: 17px;
-        padding-left: 22px;
-        padding-right: 9px;
-    }
-    #loginfo_top_right{
-        width: 65%;
-        float: left;
-        padding-top: 30px;
-        font-size: 18px;
-    }
-    #loginfo_top_right span{
-
-    }
-
-
-    #loginfo_bottom{
-        width: 100%;
-        height: 30%;
-        border-top: 1px solid rgb(215, 147, 255);
-    }
-    #loginfo_bottom div{
-        float: left;
-        width: 24.7%;
-        height: 74%;
-        text-align: center;
-        font-size: 14px;
-        padding-top: 12px;
-        cursor: pointer;
-        color: rgb(92, 92, 92);
-        font-weight: 600;
-    }
-    #goEditProfile{
-        font-size: 14px;
-        margin-left: 7px;
-        color: rgb(124, 124, 124);
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .border_right{
-        border-right: 1px solid rgb(215, 147, 255);
-    }
-    .myFont1{
-        font-size: 15px;
-        color: rgb(92, 92, 92);
-    } 
-    #notice_zone h4{
-        color: rgb(92, 92, 92);
-        margin-bottom: 10px;
-    }
-    #notice_box{
-        width: 100%;
-        border-top: 1px solid rgb(191, 80, 255);
-        border-bottom: 1px solid rgb(191, 80, 255);
-        padding: 10px 0px;
-    }
-    .notice_boxies{
-        overflow: hidden;
-        height: 20px;
-        font-size: 14px;
-        margin-bottom: 3px;
-        cursor: pointer;
-    }
-    .notice_boxies:hover{
-        color: rgb(214, 81, 255);
-    }
-
-    #btn_recentBoard{
-        cursor: pointer;
-    }
-
-    .line{
-        float: left;
-        width: 95%;
-        height: 1px;
-        background-color: rgb(215, 147, 255);
-        margin-left: 10px;
-        margin-top: 40px;
-    }
-    .hidden{
-        display: none;
-    }
-    
-    #go_logout{
-    	background-color: #fcfcfc;
-    	border: none;
-    	text-align: center;
-        font-size: 14px;
-        cursor: pointer;
-        color: rgb(92, 92, 92);
-        margin-top: 11px;
-        margin-left: 4px;
-        font-weight: 600;
-    }
-    #recent_board_zone{
-        float: left;
-        margin-left: 10px;
-    }
-    #recent_board_zone h4{
-        color: rgb(107, 107, 107);
-        margin-left: 30px;
-    }
-    .recent_boards{
-        float: left;
-        width: 140px;
-        height: 240px;
-        margin-left: 20px;
-        border: 1px solid rgb(230, 230, 230);
-        box-shadow: 3px 3px 5px rgb(231, 231, 231);
-        border-radius: 15px;
-    }
-    .recent_boards_top{
-        width: 100%;
-        height: 40%;
-        border-bottom: 1px solid rgb(230, 230, 230);
-        overflow: hidden;
-    }
-    .recent_boards_top img{
-        width: 100%;
-        height: 100%;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-
-    
-    .recent_boards_bot{
-        width: 100%;
-        height: 60%;
-        position: relative;
-        float: left;
-        padding: 12px;
-    }
-    .recent_boards_bot_title{
-        width: 85%;
-        font-size: 16px;
-        font-weight: 800;
-        color: rgb(80, 80, 80);
-        margin-bottom: 10px;
-    }
-    .recent_boards_bot_subtitle{
-        width: 85%;
-        font-size: 12px;
-        color: rgb(134, 134, 134);
-    }
-    .recent_boards_bot_btn{
-        width: 72%;
-        position: absolute;
-        bottom: 35px;
-        border: none;
-        padding: 6px 0px;
-        border-radius: 10px;
-        color: rgb(109, 109, 109);
-        font-weight: 600;
-        cursor: pointer;
-    }
-</style>
-
-
-<script>
-    $(document).ready(function(){
-        $('#searchBtn').click(function(){
-            var inputContent = $('#serach_input').val();
-            alert(inputContent);
-        });
-        $('#btn_recomendBoard').click(function(){
-            alert('ÀÎ±â°Ô½ÃÆÇ ´õ º¸¿©ÁÖ±â');
-        });
-        $('.picker_box').click(function(){
-            var whereboard = $(this).children().first().val();
-            location.href = "/board/home?no="+whereboard;
-        });
-        $('#btn_recentBoard').click(function(){
-            alert('ÃÖ±Ù¹æ¹® °Ô½ÃÆÇ ´õ º¸¿©ÁÖ±â');
-        });
-        $('.recent_board_box_comment1').click(function(){
-            var whereboard2 = $(this).next().val();
-            alert(whereboard2 + '°Ô½ÃÆÇÀ¸·Î ÀÌµ¿');
-        });
-        $('#loginBtn').click(function(){
-        	location.href = '/member/customLogin';
-        });
-        $('#go_join').click(function(){
-        	location.href = '/member/join';
-        });
-        $('#go_findId').click(function(){
-            alert('¾ÆÀÌµğ Ã£±â');
-        });
-        $('#go_findPw').click(function(){
-            alert('ºñ¹Ğ¹øÈ£ Ã£±â');
-        });
-        $('#goEditProfile').click(function(){
-            alert('³»Á¤º¸ ÀÌµ¿');
-        });
-        $('#go_myPost').click(function(){
-            alert('³» ±Û');
-        });
-        $('#go_myReply').click(function(){
-            alert('³» ´ä±Û');
-        });
-        $('#go_myMail').click(function(){
-            alert('½Ã½ºÅÛ ÁØºñÁßÀÔ´Ï´Ù.');
-        });
-        $('#makeBoardBtn').click(function(){
-        	window.open("/board/makeBoard", "³×ÀÌ¹ö»õÃ¢", "width=640, height=640, toolbar=no, menubar=no, scrollbars=no, resizable=no" );
-        });
-        $('.notice_boxies').click(function(){
-            var wherepage = $(this).next().val();
-            alert(wherepage+'ÆäÀÌÁö·Î ÀÌµ¿');
-        });
 
 
 
-        var oldVal ="";
-        $('#serach_input').on("change keyup paste", function() {
-            var currentVal = $(this).val();
-            if(currentVal == oldVal) {
-                return;
-            }
-        
-            oldVal = currentVal;
-            $('#nav_searcher').removeClass('hidden');
-            if(currentVal == ""){
-                $('#nav_searcher').addClass('hidden');
-            }
-            
-            
-            var pno='<c:out value="${getPageData.pno}"/>';
-    		
-    		$.getJSON("/board/getSearchBoard/"+currentVal,function(arr){
-    			var str="";
-    			var j=1;
-    			$("#nav_searcher_list").empty();
-    			$(arr).each(function(i,attach){
-    				if(j<=8){
-        				str += "<div class='searcher_list'>";
-        				str += attach.title;
-        				str += "</div>";
-        				str += "<input type='hidden' value='";
-        				str += attach.no;
-        				str += "'>";
-        				j++;
-    				}
-    			});
-    			$("#nav_searcher_list").html(str);
-    		});
-        });
-
-        
-        $('#nav_searcher_list').delegate(".searcher_list", "click", function(){
-            var bno = $(this).next().val();
-            location.href = "/board/home?no=" + bno;
-        });
-        
-        $('.recent_boards_bot_btn').click(function(){
-            var bno = $(this).next().val();
-            location.href = "/board/home?no=" + bno;
-        });
-        
-        
-        
-        
-        
-    });
-</script>
 
 
 <body>
     <div id="nav">
-        <!-- ·Î°í / °Ë»ö / ·Î±×ÀÎ /  -->
+        <!-- ë¡œê³  / ê²€ìƒ‰ / ë¡œê·¸ì¸ /  -->
         <div id="nav_content">
             <div id="nav_logo">MoonBoard</div>
             <div id="nav_search">
                 <input id="serach_input" type="text">
-                <input id="searchBtn" type="button" value="°Ë»ö">
+                <input id="searchBtn" type="button" value="ê²€ìƒ‰">
                 <div id="nav_searcher" class="hidden">
-                    <div id="searcher_top">Ä¿¹Â´ÏÆ¼ °Ë»ö°á°ú</div>
+                    <div id="searcher_top">ì»¤ë®¤ë‹ˆí‹° ê²€ìƒ‰ê²°ê³¼</div>
                     <div id="nav_searcher_list">
                         <!-- 
-                        <div class="searcher_list">ÀÎÃµÄÚµù¸ğÀÓ</div>
+                        <div class="searcher_list">ì¸ì²œì½”ë”©ëª¨ì„</div>
                         <input type="hidden" value="6">
                          -->
                     </div>
@@ -652,12 +64,12 @@
 
     <div id="main">
         <div id="main_left">
-            <!-- ÀÎ±â °Ô½ÃÆÇ top3 -->
+            <!-- ì¸ê¸° ê²Œì‹œíŒ top3 -->
             <div id="main_left_content">
                 <div id="main_picker">
                     <div id="main_picker_title">
-                        <p>ÀÎ±â °Ô½ÃÆÇ</p>
-                        <input id="btn_recomendBoard" type="button" value="´õº¸±â">
+                        <p>ì¸ê¸° ê²Œì‹œíŒ</p>
+                        <input id="btn_recomendBoard" type="button" value="ë”ë³´ê¸°">
                     </div>
                     <div id="main_picker_box">
                         <div id="picker_margin"></div>
@@ -666,7 +78,7 @@
 	                            <input type="hidden" value="<c:out value='${topBoard.no}'/>"/>
 	                            <div class="picker_box_img">
 	                            	<c:if test="${topBoard.uploadpath != null}">
-					                	<img src="/img/<c:out value='${topBoard.uploadpath}'/>/<c:out value='${topBoard.uuid}'/>_<c:out value='${topBoard.filename}'/>" alt="¸ŞÀÎ ¹è³ÊÀÌ¹ÌÁö">
+					                	<img src="/img/<c:out value='${topBoard.uploadpath}'/>/<c:out value='${topBoard.uuid}'/>_<c:out value='${topBoard.filename}'/>" alt="ë©”ì¸ ë°°ë„ˆì´ë¯¸ì§€">
 					                </c:if>
 					                <c:if test="${topBoard.uploadpath == null}">
 					                	<img src="/" alt=""/>
@@ -682,12 +94,12 @@
                 </div>
             </div>
             
-            <!-- È°µ¿ °Ô½ÃÆÇ? -->
+            <!-- í™œë™ ê²Œì‹œíŒ? -->
             <div class="line"></div>
             <div id="recent_board">
                 <div id="recent_board_title">
-                    <p>ÃÖ±ÙÈ°µ¿ Ä¿¹Â´ÏÆ¼</p>
-                    <input id="btn_recentBoard" type="button" value="´õº¸±â">
+                    <p>ìµœê·¼í™œë™ ì»¤ë®¤ë‹ˆí‹°</p>
+                    <input id="btn_recentBoard" type="button" value="ë”ë³´ê¸°">
                 </div>
                 <div id="recent_board_zone">
                 
@@ -695,12 +107,12 @@
                 		<c:forEach items="${recentBoard}" var="recentBoard">
                 			<div class="recent_boards">
 		                        <div class="recent_boards_top">
-		                        	<img src="/img/<c:out value='${recentBoard.uploadpath}'/>/<c:out value='${recentBoard.uuid}'/>_<c:out value='${recentBoard.filename}'/>" alt="Ä¿¹Â´ÏÆ¼ ÀÌ¹ÌÁö">
+		                        	<img src="/img/<c:out value='${recentBoard.uploadpath}'/>/<c:out value='${recentBoard.uuid}'/>_<c:out value='${recentBoard.filename}'/>" alt="ì»¤ë®¤ë‹ˆí‹° ì´ë¯¸ì§€">
 		                        </div>
 		                        <div class="recent_boards_bot">
 		                            <div class="recent_boards_bot_title"><c:out value="${recentBoard.title}"/></div>
 		                            <div class="recent_boards_bot_subtitle"><c:out value="${recentBoard.subtitle}"/></div>
-		                            <input type="button" class="recent_boards_bot_btn" value="¹æ¹®ÇÏ±â">
+		                            <input type="button" class="recent_boards_bot_btn" value="ë°©ë¬¸í•˜ê¸°">
 		                            <input type="hidden" value="<c:out value="${recentBoard.no}"/>"/>
 		                        </div>
 		                    </div>
@@ -712,7 +124,7 @@
 					
 					<sec:authorize access="isAnonymous()">
 						<div id="recent_board_zone">
-		                    <H4>ÃÖ±Ù °Ô½Ã±ÛÀÛ¼º ¹× ´ñ±ÛÈ°µ¿ÀÌ ¾ø½À´Ï´Ù.<br/>´Ù¾çÇÑ Ä¿¹Â´ÏÆ¼¿¡ ¹æ¹®ÇÏ¿© È°µ¿ÇØÁÖ¼¼¿ä!</H4>
+		                    <H4>ìµœê·¼ ê²Œì‹œê¸€ì‘ì„± ë° ëŒ“ê¸€í™œë™ì´ ì—†ìŠµë‹ˆë‹¤.<br/>ë‹¤ì–‘í•œ ì»¤ë®¤ë‹ˆí‹°ì— ë°©ë¬¸í•˜ì—¬ í™œë™í•´ì£¼ì„¸ìš”!</H4>
 		                </div>
 					</sec:authorize>
 
@@ -745,35 +157,35 @@
         <div id="main_right">
             <div id="main_right_content">
 	            <sec:authorize access="isAnonymous()">
-					<!-- ·Î±×ÀÎ -->
+					<!-- ë¡œê·¸ì¸ -->
 	                <div id="login_zone" class="">
-	                    <div id="loginBtn">·Î±×ÀÎ</div>
-	                    <a id="go_join" class="" href="#">È¸¿ø°¡ÀÔ</a>
-	                    <a id="go_findId" class="" href="#">¾ÆÀÌµğ Ã£±â</a>
-	                    <a id="go_findPw" class="" href="#">ºñ¹Ğ¹øÈ£ Ã£±â</a>
+	                    <div id="loginBtn">ë¡œê·¸ì¸</div>
+	                    <a id="go_join" class="" href="#">íšŒì›ê°€ì…</a>
+	                    <a id="go_findId" class="" href="#">ì•„ì´ë”” ì°¾ê¸°</a>
+	                    <a id="go_findPw" class="" href="#">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
 	                </div>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<!-- È¸¿øÁ¤º¸ -->
+					<!-- íšŒì›ì •ë³´ -->
 	                <div id="login_info_zone" class="">
 	                    <div id="loginfo_top">
 	                        <div id="loginfo_top_left">
 	                            <img id="profileImg" src="/resources/img/person.png" alt="">
 	                        </div>
 	                        <div id="loginfo_top_right">
-	                            <span><c:out value="${nickname }"/> ´Ô</span>
-	                            <span id="goEditProfile">³»Á¤º¸</span>
+	                            <span><c:out value="${nickname }"/> ë‹˜</span>
+	                            <span id="goEditProfile">ë‚´ì •ë³´</span>
 	                            <br/>
 	                            <span class="myFont1"><sec:authentication property="principal.username"/></span>
 	                        </div>
 	                    </div>
 	                    <div id="loginfo_bottom">
-	                        <div id="go_myPost" class="border_right">³» ±Û</div>
-	                        <div id="go_myReply" class="border_right">³» ´ñ±Û</div>
-	                        <div id="go_myMail" class="border_right">ÆíÁöÇÔ</div>
+	                        <div id="go_myPost" class="border_right">ë‚´ ê¸€</div>
+	                        <div id="go_myReply" class="border_right">ë‚´ ëŒ“ê¸€</div>
+	                        <div id="go_myMail" class="border_right">í¸ì§€í•¨</div>
 	                        <form id="_nav_logoutForm" action="/member/customLogout" method='post'>
 				                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				                <input type="submit" id="go_logout" class="" value="·Î±×¾Æ¿ô">
+				                <input type="submit" id="go_logout" class="" value="ë¡œê·¸ì•„ì›ƒ">
 				            </form>
 	                    </div>
 	                </div>
@@ -782,34 +194,34 @@
                 
             </div>
             
-            <!-- °Ô½ÃÆÇ¸¸µé±â -->
-            <div id="makeBoardBtn">°Ô½ÃÆÇ ¸¸µé±â</div>
+            <!-- ê²Œì‹œíŒë§Œë“¤ê¸° -->
+            <div id="makeBoardBtn">ê²Œì‹œíŒ ë§Œë“¤ê¸°</div>
             
-            <!-- °Ô½ÃÆÇ¸¸µé±â -->
+            <!-- ê²Œì‹œíŒë§Œë“¤ê¸° -->
             <c:if test="${manageBoardNo ne null}">
-            	<a id="moveBoardBtn" href="/board/home?no=<c:out value="${manageBoardNo }"/>" >¿î¿µÁßÀÎ °Ô½ÃÆÇ</a>
+            	<a id="moveBoardBtn" href="/board/home?no=<c:out value="${manageBoardNo }"/>" >ìš´ì˜ì¤‘ì¸ ê²Œì‹œíŒ</a>
             </c:if>
             
-            <!-- °øÁö»çÇ× -->
+            <!-- ê³µì§€ì‚¬í•­ -->
             <div id="notice_zone">
-                <h4>°øÁö»çÇ×</h4>
+                <h4>ê³µì§€ì‚¬í•­</h4>
                 <div id="notice_box">
-                    <div class="notice_boxies">[°øÁö] 11¿ù 5ÀÏ ½Ã½ºÅÛÁ¡°Ë °øÁö»çÇ×</div>
+                    <div class="notice_boxies">[ê³µì§€] 11ì›” 5ì¼ ì‹œìŠ¤í…œì ê²€ ê³µì§€ì‚¬í•­</div>
                     <input type="hidden" value="pno"/>
 
-                    <div class="notice_boxies">[¾È³»] ´Ğ³×ÀÓ º¯°æ¹æ¹ı¿¡´ëÇÑ ¾È³»</div>
-                    <div class="notice_boxies">[OPEN] ÀÎÃµ°Ô½ÃÆÇÀÌ °ø½Ä¿ÀÇÂÇÏ¿´½À´Ï´Ù</div>
-                    <div class="notice_boxies">[°øÁö] ·Î±×ÀÎ ºÒ°¡ ¿¡·¯¿¡´ëÇÑ °øÁö»çÇ×</div>
-                    <div class="notice_boxies">[¾È³»] °Ô½ÃÆÇ ¸¸µå´Â ¹æ¹ı</div>
-                    <div class="notice_boxies">[¾È³»] È¸¿øÁ¤º¸¸¦ »èÁ¦ÇÏ´Â ¹æ¹ı</div>
-                    <div class="notice_boxies">[°øÁö] 11¿ù 5ÀÏ ½Ã½ºÅÛÁ¡°Ë °øÁö»çÇ×</div>
-                    <div class="notice_boxies">[OPEN] KBOÇÁ·Î¾ß±¸°¡ °ø½Ä¿ÀÇÂÇÏ¿´½À´Ï´Ù</div>
-                    <div class="notice_boxies">[OPEN] ÄÚµùÄ¿¹Â´ÏÆ¼°¡ °ø½Ä¿ÀÇÂÇÏ¿´½À´Ï´Ù</div>
-                    <div class="notice_boxies">[OPEN] KTÀ§Áî°¡ °ø½Ä¿ÀÇÂÇÏ¿´½À´Ï´Ù</div>
+                    <div class="notice_boxies">[ì•ˆë‚´] ë‹‰ë„¤ì„ ë³€ê²½ë°©ë²•ì—ëŒ€í•œ ì•ˆë‚´</div>
+                    <div class="notice_boxies">[OPEN] ì¸ì²œê²Œì‹œíŒì´ ê³µì‹ì˜¤í”ˆí•˜ì˜€ìŠµë‹ˆë‹¤</div>
+                    <div class="notice_boxies">[ê³µì§€] ë¡œê·¸ì¸ ë¶ˆê°€ ì—ëŸ¬ì—ëŒ€í•œ ê³µì§€ì‚¬í•­</div>
+                    <div class="notice_boxies">[ì•ˆë‚´] ê²Œì‹œíŒ ë§Œë“œëŠ” ë°©ë²•</div>
+                    <div class="notice_boxies">[ì•ˆë‚´] íšŒì›ì •ë³´ë¥¼ ì‚­ì œí•˜ëŠ” ë°©ë²•</div>
+                    <div class="notice_boxies">[ê³µì§€] 11ì›” 5ì¼ ì‹œìŠ¤í…œì ê²€ ê³µì§€ì‚¬í•­</div>
+                    <div class="notice_boxies">[OPEN] KBOí”„ë¡œì•¼êµ¬ê°€ ê³µì‹ì˜¤í”ˆí•˜ì˜€ìŠµë‹ˆë‹¤</div>
+                    <div class="notice_boxies">[OPEN] ì½”ë”©ì»¤ë®¤ë‹ˆí‹°ê°€ ê³µì‹ì˜¤í”ˆí•˜ì˜€ìŠµë‹ˆë‹¤</div>
+                    <div class="notice_boxies">[OPEN] KTìœ„ì¦ˆê°€ ê³µì‹ì˜¤í”ˆí•˜ì˜€ìŠµë‹ˆë‹¤</div>
                 </div>
             </div>
-            <!-- ³» ÀÛ¼º ±Û -->
-            <!-- ³» ÀÛ¼º ´ñ±Û -->
+            <!-- ë‚´ ì‘ì„± ê¸€ -->
+            <!-- ë‚´ ì‘ì„± ëŒ“ê¸€ -->
         </div>
     </div>
 
